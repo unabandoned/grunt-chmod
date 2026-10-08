@@ -1,17 +1,27 @@
-[![Build Status](https://travis-ci.org/JamesMGreene/grunt-chmod.png?branch=master)](https://travis-ci.org/JamesMGreene/grunt-chmod)
-
 # grunt-chmod
 
 > A Grunt task plugin to modify file permissions, a la `chmod`.
 
+> **This is a maintained fork of [grunt-chmod][upstream], published as
+> [`@unabandoned/grunt-chmod`][pkg].** Upstream's last release was 1.1.1 in
+> 2015 and its repository is archived. The task name and options are
+> unchanged; `shelljs` is replaced by a small in-tree port of its `chmod` on
+> top of Node's `fs.chmodSync`, so the package has no runtime dependencies.
+> Requires Node.js 22.12 or newer. See [.unabandoned.yml](.unabandoned.yml).
+
+[upstream]: https://github.com/JamesMGreene/grunt-chmod
+[pkg]: https://www.npmjs.com/package/@unabandoned/grunt-chmod
+
 ## Getting Started
-This plugin requires Grunt `~0.4.0`
+This plugin works with Grunt 0.4 and newer.
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-chmod --save-dev
+npm install grunt-chmod@npm:@unabandoned/grunt-chmod --save-dev
 ```
+
+Installing it under the alias keeps the `grunt.loadNpmTasks('grunt-chmod')` line below working unchanged.
 
 One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
@@ -50,6 +60,10 @@ A string value to specify the permissions' [`chmod`-style numeric or symbolic mo
  - `'400'`
  - `'a+X'`
  - `'ug+rw'`
+
+Symbolic modes may be comma-separated (`'a=r,u+w'`) and ignore the umask, as in
+shelljs, which this task used to call. `X` is accepted but has no effect. A mode
+that is neither octal nor valid symbolic syntax fails the task.
 
 ### Usage Examples
 

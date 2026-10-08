@@ -1,0 +1,27 @@
+schema: 1
+
+package: "@unabandoned/grunt-chmod"
+
+upstream:
+  repo: JamesMGreene/grunt-chmod
+  reason: "no release since 1.1.1 in October 2015; the GitHub repository is archived"
+
+summary: >-
+  Grunt task that sets file and directory permissions from an octal or
+  symbolic chmod-style mode.
+
+why-forked: >-
+  CyberChef runs it at the end of its production build, and the last release
+  ships shelljs 0.5 (2015) as its only runtime dependency. The task used one
+  shelljs function, chmod, which is now a small in-tree port on top of Node's
+  fs.chmodSync, so the fork has zero runtime dependencies.
+
+used-by:
+  - consumer: TheTechNetwork/CyberChef
+    purpose: >-
+      the chmod:build target in Gruntfile.js sets mode 755 on build/ and
+      everything under it as the last step of the prod task
+
+status: active
+
+tags: [grunt, gruntplugin, build, chmod, permissions]
